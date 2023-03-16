@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-alert("hola");
+
 
 $("#guardar").click(function () {
 
@@ -34,6 +34,7 @@ $("#guardar").click(function () {
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
+    window.location.href="main.html";
     // ...
   })
   .catch((error) => {
@@ -57,6 +58,7 @@ $("#entrar").click(function () {
     // Signed in
     const user = userCredential.user;
     alert("inicio exitoso");
+    window.location.href="main.html";
     // ...
   })
   .catch((error) => {
@@ -64,5 +66,19 @@ $("#entrar").click(function () {
     const errorMessage = error.message;
     // ..
   });
+    
+})
+
+
+$("#salir").click(function () {
+
+    signOut(auth).then(() => {
+
+        window.location.href="index.html";
+        
+      }).catch((error) => {
+        alert("hubo un error al cerrar sesión");
+        
+      });
     
 })
